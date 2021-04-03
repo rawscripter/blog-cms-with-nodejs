@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-md-12 mx-auto">
+        <div class="card ">
+            <div class="card-header">Create Post</div>
+
+            <div class="card-body">
+                <form action="/admin/posts/create" method="post">
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Post Title</label>
+                        <input name="title" class="form-control" id="title" type="text" placeholder="Post Title">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">Post Status</label>
+                        <select name="status" id="status" class="form-control">
+                            <option value="Public">Public</option>
+                            <option value="Private">Private</option>
+                            <option value="Draft">Draft</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <input name="allowComments" class="ml-1 form-check-input" id="Comments" type="checkbox"
+                            placeholder="Post Title">
+                        <label for="Comments" class="ml-4">
+                            Allow Comments
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Post Description</label>
+                        <textarea name="body" id="description" class="form-control" cols="30" rows="5"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-info btn-block">Create Post</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
