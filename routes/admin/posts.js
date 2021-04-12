@@ -61,6 +61,18 @@ router.get("/:post/edit", (req, res) => {
 });
 
 router.put("/:post/update", (req, res) => {
+	// The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+	let postImageName = "";
+
+	if (req.files?.postImage) {
+		let postImage = req.files.postImage;
+		postImageName = postImage.name;
+		uploadPath = appRoot + "/public/uploads/" + postImage.name;
+		postImage.mv(uploadPath, (err) => {
+			if (err) throw err;
+		});
+	}
+
 	let request = req.body;
 	let allowComments = true;
 
@@ -75,6 +87,7 @@ router.put("/:post/update", (req, res) => {
 	Post.findByIdAndUpdate(postID, {
 		title: request.title,
 		body: request.body,
+		image: postImageName,
 		status: request.status,
 		allowComments: allowComments,
 	})
@@ -90,8 +103,9 @@ router.delete("/:post/delete", (req, res) => {
 	let request = req.body;
 
 	let postID = req.params.post;
+	req.flash("success-message", "Post deleted successfully.");
 
-	Post.remove({
+	Post.deleteOne({
 		_id: postID,
 	})
 		.then((deleted) => {

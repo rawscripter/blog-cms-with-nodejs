@@ -7,6 +7,9 @@ const PostSchema = new Schema({
 		type: String,
 		required: true,
 	},
+	image: {
+		type: String,
+	},
 	status: {
 		type: String,
 		default: "public",
